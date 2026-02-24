@@ -1,0 +1,481 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+    <meta name="theme-color" content="#2563eb" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="description" content="Ứng dụng trắc nghiệm tính cách DISC & định hướng nghề nghiệp">
+    <title>BeeSCT DISC Test</title>
+    <link rel="manifest" href="manifest.webmanifest" />
+    <link rel="apple-touch-icon" href="assets/icon-192.png">
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <main class="container">
+      <section id="screen-login" class="screen active auth-screen">
+        <div class="auth-hero">
+          <div class="auth-hero-title">BeeSCT DISC</div>
+          <img src="assets/DISC-login.png" alt="DISC" class="auth-hero-disc" />
+          <p class="auth-hero-text">
+            Khám phá xu hướng tính cách theo DISC, hiểu rõ điểm mạnh &amp; môi trường phù hợp của bản thân.
+          </p>
+        </div>
+        <div class="card auth-card">
+          <form id="login-form">
+            <div class="field">
+              <label for="login-phone">Số điện thoại</label>
+              <input id="login-phone" type="tel" placeholder="Nhập số điện thoại" />
+            </div>
+            <div class="field">
+              <label for="login-password">Mật khẩu</label>
+              <input id="login-password" type="password" placeholder="Nhập mật khẩu" />
+            </div>
+            <div id="login-error" class="note auth-error"></div>
+            <div class="auth-extra">
+              <a href="#" id="forgot-password-link">Quên mật khẩu?</a>
+            </div>
+            <button class="btn primary auth-btn" type="submit">
+              Đăng nhập
+            </button>
+          </form>
+          <div class="auth-switch">
+            <span>Chưa có tài khoản?</span>
+            <a href="#" id="link-to-register">Đăng ký</a>
+          </div>
+        </div>
+      </section>
+
+      <section id="screen-register" class="screen auth-screen">
+        <div class="auth-hero">
+          <div class="auth-hero-title">Tạo tài khoản BeeSCT DISC</div>
+          <img src="assets/DISC-login.png" alt="DISC" class="auth-hero-disc" />
+          <p class="auth-hero-text">Ứng dụng trắc nghiệm tính cách &amp; định hướng nghề nghiệp.</p>
+        </div>
+        <div class="card auth-card">
+          <h1 class="auth-title">Đăng ký</h1>
+          <form id="register-form">
+            <div class="field">
+              <label for="register-name">Họ và tên</label>
+              <input id="register-name" type="text" placeholder="Nhập họ và tên" />
+            </div>
+            <div class="field">
+              <label for="register-phone">Số điện thoại</label>
+              <input id="register-phone" type="tel" placeholder="Nhập số điện thoại" />
+            </div>
+            <div class="field">
+              <label for="register-email">Địa chỉ email (phục vụ quên mật khẩu)</label>
+              <input id="register-email" type="email" placeholder="Nhập địa chỉ email" />
+            </div>
+            <div class="field">
+              <label for="register-password">Mật khẩu</label>
+              <input id="register-password" type="password" placeholder="Nhập mật khẩu" />
+            </div>
+            <div class="field">
+              <label for="register-password2">Nhập lại mật khẩu</label>
+              <input id="register-password2" type="password" placeholder="Nhập lại mật khẩu" />
+            </div>
+            <div id="register-error" class="note auth-error"></div>
+            <div id="register-success" class="note" style="display: none"></div>
+            <button class="btn primary auth-btn" type="submit">
+              Tạo tài khoản
+            </button>
+            <button id="register-login-btn" class="btn auth-btn" type="button" style="display: none">
+              Đăng nhập
+            </button>
+          </form>
+          <div class="auth-switch">
+            <span>Đã có tài khoản?</span>
+            <a href="#" id="link-to-login">Đăng nhập</a>
+          </div>
+        </div>
+      </section>
+
+      <header id="app-toolbar" class="test-header-bar">
+        <div class="test-toolbar">
+          <button id="home-btn" class="icon-btn home-btn" type="button" aria-label="Trang chủ">
+            <img src="assets/home.png" alt="Trang chủ" class="home-icon" />
+          </button>
+          <img src="assets/logo.png" alt="BeeSCT" class="test-logo" />
+          <div class="account-shell">
+            <button id="account-btn" class="btn ghost small" type="button">Tài khoản</button>
+            <div id="account-menu" class="account-menu">
+              <button type="button" data-action="profile">Thông tin tài khoản</button>
+              <button type="button" data-action="password">Đổi mật khẩu</button>
+              <button type="button" data-action="history">Lịch sử kiểm tra</button>
+              <button type="button" data-action="logout">Đăng xuất</button>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <section id="screen-forgot" class="screen auth-screen">
+        <div class="card auth-card">
+          <h1 class="auth-title">Quên mật khẩu</h1>
+          <p class="auth-subtitle">
+            Nhập Số điện thoại đăng nhập và Email đã đăng ký để nhận mật khẩu mới.
+          </p>
+          <form id="forgot-form">
+            <div class="field">
+              <label for="forgot-phone">Số điện thoại</label>
+              <input id="forgot-phone" type="tel" placeholder="Nhập số điện thoại" />
+            </div>
+            <div class="field">
+              <label for="forgot-email">Email</label>
+              <input id="forgot-email" type="email" placeholder="Nhập email đã đăng ký" />
+            </div>
+            <div id="forgot-error" class="note auth-error"></div>
+            <div id="forgot-success" class="note" style="display: none"></div>
+            <button class="btn primary auth-btn" type="submit">
+              Gửi yêu cầu đặt lại
+            </button>
+            <button id="forgot-back-btn" class="btn auth-btn" type="button">
+              Quay lại đăng nhập
+            </button>
+          </form>
+        </div>
+      </section>
+
+      <section id="screen-consent" class="screen">
+        <div class="card test-desc">
+          <h3 class="test-desc-title">Giới thiệu bài đánh giá DISC – BeeSCT</h3>
+
+          <p>
+            Bài đánh giá <span class="accent">DISC</span> của <span class="accent">BeeSCT</span> được xây dựng dựa trên
+            mô hình <span class="accent">DISC</span> – một hệ thống phân tích hành vi được phát triển từ nền tảng
+            nghiên cứu của William Moulton Marston và hiện đang được ứng dụng rộng rãi trong quản trị nhân sự, phát
+            triển tổ chức và lãnh đạo.
+          </p>
+
+          <p>
+            Công cụ này giúp xác định xu hướng hành vi nổi trội của mỗi cá nhân theo bốn nhóm chính:
+            <span class="disc-tag disc-d">D</span> (Dominance),
+            <span class="disc-tag disc-i">I</span> (Influence),
+            <span class="disc-tag disc-s">S</span> (Steadiness),
+            <span class="disc-tag disc-c">C</span> (Conscientiousness).
+          </p>
+
+          <p>
+            Thông qua <span class="accent">các câu hỏi lựa chọn tình huống</span>, hệ thống sẽ phân tích dữ liệu và cung
+            cấp báo cáo tổng hợp dưới dạng biểu đồ và nhận định chuyên sâu, nhằm:
+          </p>
+
+          <ul class="test-desc-list">
+            <li>Nhận diện phong cách làm việc và ra quyết định</li>
+            <li>Đánh giá mức độ phù hợp với vai trò, chức năng công việc</li>
+            <li>Hỗ trợ xây dựng kế hoạch phát triển năng lực cá nhân</li>
+            <li>Tăng cường hiệu quả giao tiếp và phối hợp trong tổ chức</li>
+            <li>Góp phần tối ưu hóa bố trí nhân sự và phát triển đội ngũ</li>
+          </ul>
+
+          <p>
+            Kết quả đánh giá không nhằm phân loại năng lực hay giá trị cá nhân, mà cung cấp cơ sở tham khảo mang tính
+            khoa học để hỗ trợ công tác quản trị và phát triển nguồn nhân lực một cách khách quan và hiệu quả.
+          </p>
+        </div>
+
+        <p class="consent-note">
+          Bạn đồng ý tham gia bài đánh giá DISC và cho phép lưu kết quả để phục vụ tư vấn sau này?
+        </p>
+        <div class="actions">
+          <button id="intro-next-btn" class="btn primary">Tiếp tục</button>
+          <button id="intro-exit-btn" class="btn">Thoát</button>
+        </div>
+      </section>
+
+      <section id="screen-candidate" class="screen">
+        <div class="card candidate-card">
+          <div class="candidate-header">
+            <div class="candidate-title">Thông tin ứng viên</div>
+            <div class="candidate-subtitle">Vui lòng điền đầy đủ để cá nhân hoá kết quả DISC.</div>
+          </div>
+          <div class="candidate-body">
+            <div class="field">
+              <label for="candidate-name"><span class="required-dot"></span>Họ và tên ứng viên</label>
+              <input id="candidate-name" type="text" placeholder="Nhập họ và tên" required />
+            </div>
+            <div class="field">
+              <label for="candidate-gender"><span class="required-dot"></span>Giới tính</label>
+              <select id="candidate-gender" required>
+                <option value="">Chọn giới tính</option>
+                <option value="Nam">Nam</option>
+                <option value="Nữ">Nữ</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="candidate-birth-year"><span class="required-dot"></span>Năm sinh</label>
+              <input id="candidate-birth-year" type="number" inputmode="numeric" placeholder="VD: 1995" required />
+            </div>
+            <div class="field">
+              <label for="candidate-job"><span class="required-dot"></span>Nghề nghiệp</label>
+              <input id="candidate-job" type="text" placeholder="VD: Nhân viên kinh doanh" required />
+            </div>
+            <div class="field">
+              <label for="candidate-phone"><span class="required-dot"></span>Số điện thoại ứng viên</label>
+              <input id="candidate-phone" type="tel" placeholder="Nhập số điện thoại" required />
+            </div>
+          </div>
+          <label class="consent">
+            <input type="checkbox" id="consent-checkbox" />
+            Bạn đồng ý tham gia và cho phép lưu kết quả?
+          </label>
+          <div id="candidate-error" class="note auth-error"></div>
+          <div class="actions">
+            <button id="start-btn" class="btn primary" disabled>Tiếp tục</button>
+            <button id="exit-btn" class="btn">Thoát</button>
+          </div>
+        </div>
+      </section>
+
+      <section id="screen-select-version" class="screen">
+        <div class="card selection-card">
+          <div class="selection-header">
+            <h2 class="selection-title">Lựa chọn phiên bản trắc nghiệm</h2>
+            <p class="selection-subtitle">Vui lòng chọn phiên bản phù hợp với nhu cầu của bạn</p>
+          </div>
+          <div class="selection-options">
+            <div class="selection-item" id="select-12-questions">
+              <div class="selection-info">
+                <h3 class="selection-name">BeeSCT Mini DISC (12 Câu)</h3>
+                <p class="selection-desc">Phiên bản rút gọn, tối ưu và nhận diện nhanh phong cách cá nhân.</p>
+              </div>
+              <button class="btn primary full-width">BẮT ĐẦU</button>
+            </div>
+            <div class="selection-item" id="select-28-questions">
+              <div class="selection-info">
+                <h3 class="selection-name">BeeSCT Full DISC (28 Câu)</h3>
+                <p class="selection-desc">Phiên bản đầy đủ, chuyên sâu và chi tiết nhất về xu hướng hành vi của bạn.</p>
+              </div>
+              <button class="btn ghost full-width">BẮT ĐẦU</button>
+            </div>
+          </div>
+          <div class="actions">
+            <button id="selection-back-btn" class="btn">Quay lại</button>
+          </div>
+        </div>
+      </section>
+
+      <section id="screen-test" class="screen">
+        <div class="card test-hero">
+          <div class="test-header-main">
+            <div class="test-header-text">
+              <h1 class="test-title">BÀI TRẮC NGHIỆM TÍNH CÁCH DISC</h1>
+              <p class="test-subtitle">
+                Chọn 1 đáp án giống bạn nhất và 1 đáp án khác bạn nhất
+              </p>
+            </div>
+            <img src="assets/DISC.png" alt="Sơ đồ DISC" class="test-disc-img" />
+          </div>
+        </div>
+        <div class="progress"><span id="progress-text"></span></div>
+        <div id="question-group" class="card test-question-card"></div>
+        <div class="actions">
+          <button id="prev-btn" class="btn">Quay lại</button>
+          <button id="next-btn" class="btn primary">Tiếp tục</button>
+        </div>
+      </section>
+
+      <section id="screen-result" class="screen">
+        <h2 style="text-align:center;margin-bottom:20px;">Kết quả phân tích DISC</h2>
+        
+        <div style="text-align:center;margin-bottom:16px;">
+          <a href="#" id="view-disc-info-link" style="font-size:14px;color:var(--primary);text-decoration:underline;">
+            Tìm hiểu nguyên tắc và mô hình DISC
+          </a>
+        </div>
+
+        <div id="result-columns" class="result-columns">
+          <!-- Biểu đồ 1: Thích ứng -->
+          <div class="chart-card">
+            <div class="chart-title">Phong cách Thích ứng (Adapted)</div>
+            <div id="bars-adapted" class="bars"></div>
+          </div>
+          <!-- Biểu đồ 2: Tự nhiên -->
+          <div class="chart-card">
+            <div class="chart-title">Phong cách Tự nhiên (Natural)</div>
+            <div id="bars-natural" class="bars"></div>
+          </div>
+        </div>
+
+        <div class="chart-card" style="margin-bottom:24px;">
+          <div class="chart-title">Biểu đồ Mô hình Hành vi (BPV)</div>
+          <div class="bpv-legend">
+            <div class="bpv-legend-item">
+              <span class="bpv-marker marker-natural">●</span> Phong cách Tự nhiên
+            </div>
+            <div class="bpv-legend-item">
+              <span class="bpv-marker marker-adapted">★</span> Phong cách Thích ứng
+            </div>
+          </div>
+          <div id="bpv-container" class="bpv-container">
+            <img src="assets/DISC-BPV.png" alt="Biểu đồ BPV" class="bpv-bg" />
+            <!-- Markers sẽ được thêm bằng JS -->
+          </div>
+        </div>
+
+        <div id="piechart" class="pie-container"></div>
+        <div id="details" class="details" style="display:none"></div>
+        
+        <div id="result-analysis" class="result-analysis"></div>
+
+        <div class="actions">
+          <button id="restart-btn" class="btn">Làm lại</button>
+          <button id="save-btn" class="btn primary">Lưu kết quả</button>
+          <button id="result-history-back" class="btn" type="button" style="display: none">Quay lại</button>
+        </div>
+        <div id="save-status" class="note"></div>
+      </section>
+
+      <section id="screen-disc-info" class="screen">
+        <div class="card info-card">
+          <h2 class="info-title">Biểu đồ Mô hình Hành vi (BPV)</h2>
+          
+          <div class="info-content">
+            <p>
+              BPV có tám vùng hành vi. Mỗi vùng đại diện cho một cách kết hợp những đặc điểm hành vi khác nhau.
+              Các mô tả ngoại vi thể hiện cách nhìn nhận của mọi người đối với phong cách hành vi cơ bản của bạn.
+            </p>
+            <p>
+              Đường cong phía mép ngoài của BPV xác định một yếu tố (DISC) trong phong cách của bạn mà sẽ chi phối ba yếu tố còn lại.
+              Khi bạn tiến về phía trung tâm của BPV có hai, thậm chí là ba đặc điểm kết hợp để trung hòa mức độ của các yếu tố mô tả phong cách của bạn trong vùng hành vi cụ thể.
+            </p>
+            <p>
+              <em>+Dấu cộng cho biết điểm phong cách trước đó cao hơn, nghĩa là bạn ở gần khu vực phong cách đó hơn (nghĩa là CD+S: Điểm D mạnh hơn trong CDS nên được vẽ gần vùng hành vi D hơn).</em>
+            </p>
+
+            <h3>CHÚ THÍCH ĐIỂM SỐ</h3>
+            <ul class="disc-legend">
+              <li><span class="legend-d">D = Chi phối:</span> Cách bạn giải quyết các Vấn đề và những Thách thức.</li>
+              <li><span class="legend-i">I = Ảnh hưởng:</span> Cách bạn đối xử với Người khác và các Mối liên hệ.</li>
+              <li><span class="legend-s">S = Kiên định:</span> Cách bạn dung hòa giữa Tốc độ và Sự nhất quán.</li>
+              <li><span class="legend-c">C = Tận tâm/Tuân thủ/Cấu trúc:</span> Cách bạn xử lý quy trình và các hạn chế.</li>
+            </ul>
+
+            <div class="bpv-diagram">
+              <img src="assets/DISC.png" alt="Biểu đồ Mô hình Hành vi BPV" style="width:100%;max-width:600px;display:block;margin:20px auto;border-radius:12px;" />
+            </div>
+
+            <div class="bpv-details">
+              <div class="bpv-quadrant">
+                <strong>D (Đỏ):</strong> Quyết đoán, Tập trung vào kết quả, Quyết định nhanh, Tìm kiếm thử thách, Thiếu kiên nhẫn, Khao khát được lãnh đạo.
+              </div>
+              <div class="bpv-quadrant">
+                <strong>I (Vàng):</strong> Rất thân thiện & Có tài thuyết phục, Rất hướng đến con người, Nhìn nhận sự việc khá lạc quan, Kỹ năng giao tiếp tốt, Thích cuộc sống đa dạng.
+              </div>
+              <div class="bpv-quadrant">
+                <strong>S (Xanh lá):</strong> Rất kiên nhẫn & Thích ổn định và Bền vững. Không thích mạo hiểm, Thích làm mọi việc một cách thong thả và chắc chắn.
+              </div>
+              <div class="bpv-quadrant">
+                <strong>C (Xanh dương):</strong> Dựa trên Dữ liệu, Dữ kiện và Phân tích. Tỉ mỉ và Chính xác, Tin tưởng vào Giá trị của Cấu trúc, Tiêu chuẩn & Trình tự.
+              </div>
+            </div>
+          </div>
+
+          <div class="actions">
+            <button id="info-back-btn" class="btn primary">Đóng</button>
+          </div>
+        </div>
+      </section>
+
+      <section id="screen-history" class="screen">
+        <h2>Lịch sử kiểm tra DISC</h2>
+        <div id="history-list" class="history-list"></div>
+        <div class="actions">
+          <button id="history-back" class="btn">Quay lại</button>
+        </div>
+      </section>
+
+      <section id="screen-profile" class="screen auth-screen">
+        <div class="card auth-card">
+          <h1 class="auth-title">Thông tin tài khoản</h1>
+          <p class="auth-subtitle">
+            Cập nhật thông tin để BeeSCT có thể hỗ trợ bạn tốt hơn và dùng cho quên mật khẩu.
+          </p>
+          <form id="profile-form">
+            <div class="field">
+              <label for="profile-name">Họ và tên</label>
+              <input id="profile-name" type="text" placeholder="Nhập họ và tên" />
+            </div>
+            <div class="field">
+              <label for="profile-phone">Số điện thoại đăng nhập</label>
+              <input id="profile-phone" type="tel" placeholder="Số điện thoại đăng nhập" disabled />
+            </div>
+            <div class="field">
+              <label for="profile-email">Email</label>
+              <input id="profile-email" type="email" placeholder="Nhập email" />
+            </div>
+            <div class="field">
+              <label for="profile-gender">Giới tính</label>
+              <select id="profile-gender">
+                <option value="">Không chọn</option>
+                <option value="Nam">Nam</option>
+                <option value="Nữ">Nữ</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="profile-birth-year">Năm sinh</label>
+              <input id="profile-birth-year" type="number" inputmode="numeric" placeholder="VD: 1990" />
+            </div>
+            <div class="field">
+              <label for="profile-job">Nghề nghiệp</label>
+              <input id="profile-job" type="text" placeholder="VD: Quản lý, Nhân viên kinh doanh..." />
+            </div>
+            <div class="field">
+              <label for="profile-phone-contact">Số điện thoại liên hệ</label>
+              <input id="profile-phone-contact" type="tel" placeholder="Nếu khác với số đăng nhập" />
+            </div>
+            <div id="profile-error" class="note auth-error"></div>
+            <div id="profile-success" class="note" style="display: none"></div>
+            <button class="btn primary auth-btn" type="submit">
+              Lưu thông tin
+            </button>
+            <button id="profile-back-btn" class="btn auth-btn" type="button">
+              Quay lại
+            </button>
+          </form>
+        </div>
+      </section>
+
+      <section id="screen-change-password" class="screen auth-screen">
+        <div class="card auth-card">
+          <h1 class="auth-title">Đổi mật khẩu</h1>
+          <p class="auth-subtitle">
+            Nhập mật khẩu hiện tại và mật khẩu mới để thay đổi thông tin đăng nhập của bạn.
+          </p>
+          <form id="password-form">
+            <div class="field">
+              <label for="password-old">Mật khẩu hiện tại</label>
+              <input id="password-old" type="password" placeholder="Nhập mật khẩu hiện tại" />
+            </div>
+            <div class="field">
+              <label for="password-new">Mật khẩu mới</label>
+              <input id="password-new" type="password" placeholder="Nhập mật khẩu mới" />
+            </div>
+            <div class="field">
+              <label for="password-new2">Nhập lại mật khẩu mới</label>
+              <input id="password-new2" type="password" placeholder="Nhập lại mật khẩu mới" />
+            </div>
+            <div id="password-error" class="note auth-error"></div>
+            <div id="password-success" class="note" style="display: none"></div>
+            <button class="btn primary auth-btn" type="submit">
+              Lưu mật khẩu
+            </button>
+            <button id="password-back-btn" class="btn auth-btn" type="button">
+              Quay lại
+            </button>
+          </form>
+        </div>
+      </section>
+
+      <footer style="text-align: center; padding: 20px; color: #64748b; font-size: 13px; margin-top: 40px;">
+        Phiên bản 1.2@2026 - Phát triển bởi NTKIEN
+      </footer>
+    </main>
+
+    <script src="questions-12.js"></script>
+    <script src="questions-28.js"></script>
+    <script src="app.js"></script>
+  </body>
+  </html>
+
