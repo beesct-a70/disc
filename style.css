@@ -262,7 +262,7 @@ p { color: var(--muted); }
 .auth-hero-text {
   margin-top: 6px;
   font-size: 14px;
-  max-width: 60%;
+  max-width: 65%;
   padding-right: 0;
   line-height: 1.5;
   color: rgba(255, 255, 255, 0.96);
@@ -271,10 +271,9 @@ p { color: var(--muted); }
 }
 .auth-hero-disc {
   position: absolute;
-  right: -20px;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 140px;
+  right: 5px; /* Dịch sang trái một chút so với -5px */
+  top: 10%; /* Đẩy lên trên một chút so với 24% */
+  width: 150px;
   height: auto;
   z-index: 1;
   filter: drop-shadow(0 6px 14px rgba(15, 23, 42, 0.35));

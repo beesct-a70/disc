@@ -1,4 +1,4 @@
-const CACHE_NAME = 'beesct-disc-v2';
+const CACHE_NAME = 'beesct-disc-v3';
 const ASSETS = [
   './',
   './index.html',
